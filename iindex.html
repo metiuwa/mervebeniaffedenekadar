@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merve Beni Affeder Misin?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+      color: #333;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      transition: all 0.5s ease;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .yes {
+      background-color: #28a745;
+      color: #fff;
+    }
+
+    .yes:hover {
+      background-color: #218838;
+    }
+
+    .no {
+      background-color: #dc3545;
+      color: #fff;
+      position: absolute;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 2rem;
+      color: red;
+      animation: float 4s ease-in-out forwards;
+    }
+
+    @keyframes float {
+      0% {
+        transform: scale(0) translateY(0);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.5) translateY(-50px);
+        opacity: 0.9;
+      }
+      100% {
+        transform: scale(2) translateY(-150px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="mainText">Beni Affeder Misin?</h1>
+  <div class="buttons">
+    <button class="yes" onclick="affet()">Evet</button>
+    <button class="no" id="noButton" onclick="birDahaDusun()">Hayır</button>
+  </div>
+
+  <script>
+    const noButton = document.getElementById('noButton');
+    const mainText = document.getElementById('mainText');
+
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+      noButton.style.left = `${x}px`;
+      noButton.style.top = `${y}px`;
+    }
+
+
+    setInterval(() => {
+      moveNoButton();
+    }, 200); 
+
+    noButton.addEventListener('mouseover', moveNoButton);
+    noButton.addEventListener('touchstart', moveNoButton);
+
+    function affet() {
+      for (let i = 0; i < 10; i++) {
+        createHeart();
+      }
+      alert("Teşekkür ederim! Seni çok seviyorum! ❤️");
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤️';
+      document.body.appendChild(heart);
+
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+
+      heart.addEventListener('animationend', () => {
+        heart.remove();
+      });
+    }
+
+    function birDahaDusun() {
+      mainText.innerText = "Bir kere daha düşün. \n \n Beni affeder misin?";
+    }
+
+    noButton.style.position = 'absolute';
+    moveNoButton();
+  </script>
+</body>
+</html>
